@@ -1,7 +1,19 @@
 import React from 'react';
 import { CollectionPoint } from '@/lib/types';
-import { collectionPoints } from '@/lib/seed-data';
 import Image from 'next/image';
+import clientPromise from '@/lib/mongodb';
+
+async function getCollectionPoints(): Promise<CollectionPoint[]> {
+  const client = await clientPromise
+  const db = client.db(process.env.MONGODB_DB)
+
+  const collectionPoints = await db
+    .collection('collectionPoints')
+    .find({})
+    .toArray()
+
+  return collectionPoints as unknown as CollectionPoint[]
+}
 
 // CollectionPointCard component
 const CollectionPointCard: React.FC<{ point: CollectionPoint }> = ({ point }) => (
@@ -38,7 +50,8 @@ const CollectionPointsList: React.FC<{ collectionPoints: CollectionPoint[] }> = 
 };
 
 // Main Page component
-const CollectionPointsPage: React.FC = () => {
+const CollectionPointsPage: React.FC = async () => {
+  const collectionPoints = await getCollectionPoints();
   return (
     <div className="min-h-screen">
       <CollectionPointsList collectionPoints={collectionPoints} />
