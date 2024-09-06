@@ -1,6 +1,6 @@
 import React from 'react';
-import { CollectionPoint } from '../lib/types';
-import { collectionPoints } from '../lib/seed-data';
+import { CollectionPoint } from '@/lib/types';
+import { collectionPoints } from '@/lib/seed-data';
 import Image from 'next/image';
 
 // CollectionPointCard component

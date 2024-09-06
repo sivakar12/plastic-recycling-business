@@ -1,4 +1,4 @@
-import { CollectionPoint } from "./types";
+import { CollectionPoint } from "@/lib/types";
 
 export const collectionPoints: CollectionPoint[] = [
   {
